@@ -74,7 +74,7 @@ public static void main(String args[]){
 
     
     // Inicialitzacio de l'EntityManager i del gestor de la persistencia
-    emf = Persistence.createEntityManagerFactory("$objectdb/db/eyou.odb");
+    emf = Persistence.createEntityManagerFactory("$objectdb/db/database.odb");
     em=emf.createEntityManager();
 
     gestor = new GestorObjectDB(em);
@@ -115,15 +115,6 @@ public static void main(String args[]){
         System.out.println(a.toString()); 
     }
     System.out.println("\n");
-
-    
-    
-    System.out.println("Articles sota minims");
-    System.out.println("====================");
-
-    for(Article a: resultatA){ System.out.println(a.toString()); }
-    System.out.println("\n");
-
     
     //Ejercicio 4
     resultatAE=gestor.articlesEnvasatsAmb("paquet");
