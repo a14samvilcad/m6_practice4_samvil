@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.ManyToOne;
 
 /**
  * Classe que representa un envas en que es serveix algun dels productes envasats
@@ -15,13 +16,10 @@ import javax.persistence.IdClass;
  * Per exemple: ampolla d'1.5 litres o paquet de 100 gr.
  * @author professor
  */
-
 @Entity
 @IdClass(EnvasId.class)
 public class Envas implements Serializable {
-    @Id
     private String tipus;
-    @Id
     private double quantitat;
     private UnitatDeMesura unitat;
 
@@ -49,6 +47,7 @@ public class Envas implements Serializable {
      * Obtenir el tipus d'envas
      * @return el tipus de l'envas
      */
+    @Id
     public String getTipus() {
         return tipus;
     }
@@ -65,6 +64,7 @@ public class Envas implements Serializable {
      * Obtenir la quantitat que conte l'envas
      * @return la quantitat que conte l'envas
      */
+    @Id
     public double getQuantitat() {
         return quantitat;
     }
@@ -81,6 +81,7 @@ public class Envas implements Serializable {
      * Obtenir la unitat en que es mesura el contingut de l'envas
      * @return unitat en que es mesura el contingut de l'envas
      */
+    @ManyToOne
     public UnitatDeMesura getUnitat() {
         return unitat;
     }

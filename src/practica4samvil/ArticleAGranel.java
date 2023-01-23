@@ -6,9 +6,7 @@ package practica4samvil;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
-
-
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -16,9 +14,10 @@ import javax.persistence.ManyToOne;
  * @author professor
  */
 @Entity
+@NamedQuery(name="ArticleAGranel.perTipusMesura", query="SELECT a FROM ArticleAGranel a WHERE a.unitat.simbol = :unitat")
+
 public class ArticleAGranel extends Article {
     private static final long serialVersionUID = 1L;
-    @ManyToOne
     private UnitatDeMesura unitat;
 
     /**
@@ -53,6 +52,7 @@ public class ArticleAGranel extends Article {
      * Obtenir la unitat de mesura de l'article
      * @return la unitat de mesura
      */
+    @ManyToOne
     public UnitatDeMesura getUnitat() {
         return unitat;
     }

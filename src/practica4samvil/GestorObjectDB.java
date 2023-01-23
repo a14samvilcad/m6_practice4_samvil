@@ -10,9 +10,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import practica4samvil.Article;
-import practica4samvil.ArticleAGranel;
-import practica4samvil.ArticleEnvasat;
 
 /**
  * Classe que proporciona mètodes per a gestionar la persistencia dels diferents objectes
@@ -35,9 +32,9 @@ public class GestorObjectDB implements Serializable {
      */
 
     public void inserir(Article article) {
-     em.getTransaction().begin();
-     em.persist(article);
-     em.getTransaction().commit();
+        em.getTransaction().begin();
+        em.persist(article);
+        em.getTransaction().commit();
     }
 
     /**
@@ -45,10 +42,9 @@ public class GestorObjectDB implements Serializable {
      * @param envas envas a inserir
      */
     public void inserir(Envas envas) {
-     em.getTransaction().begin();
-     em.persist(envas);
-     em.getTransaction().commit();
-
+        em.getTransaction().begin();
+        em.persist(envas);
+        em.getTransaction().commit();
     }
 
     /**
@@ -57,35 +53,43 @@ public class GestorObjectDB implements Serializable {
      */
 
     public void inserir(UnitatDeMesura unitatDeMesura) {
-     em.getTransaction().begin();
-     em.persist(unitatDeMesura);
-     em.getTransaction().commit();
-
+        em.getTransaction().begin();
+        em.persist(unitatDeMesura);
+        em.getTransaction().commit();
     }
-
 
     /**
      * Obté tots els articles 
      * @return llista de tots els articles 
      */
     public List<Article> totsArticles(){
-        List<Article> resultatA;
-        Query qry = em.createQuery("SELECT a FROM Article a");
-        resultatA = (List<Article>) qry.getResultList();
-        return resultatA; //cal canviar el valor de retorn
+        em.getTransaction().begin();
+        Query q=em.createNamedQuery("Article.tots");
+
+        List<Article> resultat=q.getResultList();
+
+        em.getTransaction().commit();
+
+        return resultat;
     }
 
+
+    
     /**
      * Obté tots els articles envasats amb un envas d'un tipus determinat
      * @param tipus identificador del tipus d'envas dels articles que es retornen
      * @return  llista dels articles envasats amb l'envas del un tipus donat
      */
     public List<ArticleEnvasat> articlesEnvasatsAmb(String tipus){
-        List<ArticleEnvasat> resultatAE;
-        Query qry = em.createQuery("SELECT a FROM ArticleEnvasat a WHERE a.id = '" + tipus + "'");
-        resultatAE = (List<ArticleEnvasat>) qry.getResultList();
-        
-        return resultatAE; //cal canviar el valor de retorn
+        em.getTransaction().begin();
+        Query q=em.createNamedQuery("ArticleEnvasat.perTipusEnvas");
+
+        q.setParameter("tipusEnvas",tipus);
+        List<ArticleEnvasat> resultat=q.getResultList();
+
+        em.getTransaction().commit();
+
+        return resultat;
     }
 
     /**
@@ -94,11 +98,17 @@ public class GestorObjectDB implements Serializable {
      * @return  llista dels articles a granel que es mesuren amb la unitat de mesura donada
      */
     public List<ArticleAGranel> articlesMesuratsEn(String abreviacio){
-        List<ArticleAGranel> resultatAAG;
-        Query qry = em.createQuery("SELECT a FROM ArticleAGranel a WHERE a.id = '" + abreviacio + "'");
-        resultatAAG = (List<ArticleAGranel>) qry.getResultList();
-        
-        return resultatAAG; //cal canviar el valor de retorn
+        em.getTransaction().begin();
+        Query q=em.createNamedQuery("ArticleAGranel.perTipusMesura");
+
+        q.setParameter("unitat",abreviacio);
+        List<ArticleAGranel> resultat=q.getResultList();
+
+        em.getTransaction().commit();
+
+        return resultat;
     }
+
+
 
 }

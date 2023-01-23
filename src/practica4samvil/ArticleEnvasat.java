@@ -5,16 +5,16 @@
 package practica4samvil;
 
 import javax.persistence.Entity;
-
-
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
  * Classe que representa un article que es serveix en envas
  * @author professor
  */
-
 @Entity
+@NamedQuery(name="ArticleEnvasat.perTipusEnvas", query="SELECT a FROM ArticleEnvasat a WHERE a.envas.tipus = :tipusEnvas")
 public class ArticleEnvasat extends Article {
     private Envas envas;
 
@@ -49,6 +49,7 @@ public class ArticleEnvasat extends Article {
      * Obtenir l'envas en que es serveix l'article
      * @return l'envas
      */
+    @ManyToOne
     public Envas getEnvas() {
         return envas;
     }

@@ -11,11 +11,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
+/**
+ * Classe que nomes conte un programa principal
+ * @author professor
+ */
 public class Programa {
 
 /**
  * Programa principal
+ * @param args parametres que s'han passat al programa des de la linia d'ordres; no es tenen en compte.
  */
     
 public static void main(String args[]){
@@ -30,6 +34,7 @@ public static void main(String args[]){
     
     EntityManagerFactory emf;
     EntityManager em;
+    //final String PU = "ActivitatObjectDB";
 
     GestorObjectDB gestor;
     
@@ -69,14 +74,14 @@ public static void main(String args[]){
 
     
     // Inicialitzacio de l'EntityManager i del gestor de la persistencia
-    emf = Persistence.createEntityManagerFactory("$objectdb/db/holaa.odb");
-    em = emf.createEntityManager();
+    emf = Persistence.createEntityManagerFactory("$objectdb/db/eyou.odb");
+    em=emf.createEntityManager();
 
     gestor = new GestorObjectDB(em);
 
     
     //Altes
-    /*
+    
     gestor.inserir(kg);
     gestor.inserir(gr);
     gestor.inserir(litre);
@@ -95,15 +100,13 @@ public static void main(String args[]){
 
     gestor.inserir(pera);
     gestor.inserir(poma);
-    gestor.inserir(platan);*/
-    
+    gestor.inserir(platan);
     
     // Consultes
     
+    //EJERCICIO 3
     resultatA=gestor.totsArticles(); 
 
-
-    //Consulta 1
     System.out.println("Tots els articles");
     System.out.println("=================");
     em.flush();
@@ -114,23 +117,30 @@ public static void main(String args[]){
     System.out.println("\n");
 
     
-    //Consulta 2
-    resultatAE=gestor.articlesEnvasatsAmb("AIGUA MIN");
+    
+    System.out.println("Articles sota minims");
+    System.out.println("====================");
+
+    for(Article a: resultatA){ System.out.println(a.toString()); }
+    System.out.println("\n");
+
+    
+    //Ejercicio 4
+    resultatAE=gestor.articlesEnvasatsAmb("paquet");
 
     System.out.println("Articles envasats en paquets");
     System.out.println("============================");
 
 
-    for(ArticleEnvasat a: resultatAE){
-       System.out.println(a.toString()); 
+    for(ArticleEnvasat a: resultatAE){ 
+        System.out.println(a.toString()); 
     }
     System.out.println("\n");
 
-    
-    
-    //Consulta 3
-    resultatAAG = gestor.articlesMesuratsEn("kg");
 
+    
+    //Ejercicio 5
+    resultatAAG = gestor.articlesMesuratsEn("kg");
 
     System.out.println("Articles mesurats en kg");
     System.out.println("=======================");

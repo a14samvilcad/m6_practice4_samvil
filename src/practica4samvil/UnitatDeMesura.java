@@ -8,17 +8,14 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
 /**
  * Classe que representa una unitat de mesura
  * Cada objecte s'identifica pel simbol o abreviacio
  * @author professor
  */
-
 @Entity
 public class UnitatDeMesura implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
     private String simbol=null;
     private String descripcio=null;
 
@@ -55,6 +52,7 @@ public class UnitatDeMesura implements Serializable {
      * Obtenir el simbol o abreviacio que identifica la unitat de mesura
      * @return  simbol o abreviacio que identifica la unitat de mesura
      */
+    @Id
     public String getSimbol() {
         return simbol;
     }

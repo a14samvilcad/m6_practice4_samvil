@@ -7,7 +7,8 @@ package practica4samvil;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * Classe que representa un article
@@ -16,8 +17,11 @@ import javax.persistence.Id;
  */
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Article.tots", query="SELECT a FROM Article a")
+}
+)
 public class Article implements Serializable {
-    @Id
     private String id; //denominació de l'article
     private String descripcio;
     private String marca;
@@ -62,7 +66,7 @@ public class Article implements Serializable {
      * Obtenir l'identificador de l'article
      * @return identificador de l'article
      */
-   
+    @Id
     public String getId() {
         return id;
     }
