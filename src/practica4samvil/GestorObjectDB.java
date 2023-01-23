@@ -81,7 +81,11 @@ public class GestorObjectDB implements Serializable {
      * @return  llista dels articles envasats amb l'envas del un tipus donat
      */
     public List<ArticleEnvasat> articlesEnvasatsAmb(String tipus){
-        return null; //cal canviar el valor de retorn
+        List<ArticleEnvasat> resultatAE;
+        Query qry = em.createQuery("SELECT a FROM ArticleEnvasat a WHERE a.id = '" + tipus + "'");
+        resultatAE = (List<ArticleEnvasat>) qry.getResultList();
+        
+        return resultatAE; //cal canviar el valor de retorn
     }
 
     /**
@@ -90,7 +94,11 @@ public class GestorObjectDB implements Serializable {
      * @return  llista dels articles a granel que es mesuren amb la unitat de mesura donada
      */
     public List<ArticleAGranel> articlesMesuratsEn(String abreviacio){
-        return null; //cal canviar el valor de retorn
+        List<ArticleAGranel> resultatAAG;
+        Query qry = em.createQuery("SELECT a FROM ArticleAGranel a WHERE a.id = '" + abreviacio + "'");
+        resultatAAG = (List<ArticleAGranel>) qry.getResultList();
+        
+        return resultatAAG; //cal canviar el valor de retorn
     }
 
 }

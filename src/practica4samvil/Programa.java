@@ -69,8 +69,8 @@ public static void main(String args[]){
 
     
     // Inicialitzacio de l'EntityManager i del gestor de la persistencia
-    emf = Persistence.createEntityManagerFactory("$objectdb/db/megustaDb.odb");
-    em=emf.createEntityManager();
+    emf = Persistence.createEntityManagerFactory("$objectdb/db/holaa.odb");
+    em = emf.createEntityManager();
 
     gestor = new GestorObjectDB(em);
 
@@ -115,7 +115,7 @@ public static void main(String args[]){
 
     
     //Consulta 2
-    resultatAE=gestor.articlesEnvasatsAmb("paquet");
+    resultatAE=gestor.articlesEnvasatsAmb("AIGUA MIN");
 
     System.out.println("Articles envasats en paquets");
     System.out.println("============================");
